@@ -381,9 +381,9 @@ function AdminGate({
           </Button>
         </div>
         <p className="mt-4 font-body-serif text-[0.7rem] leading-relaxed text-muted-foreground">
-          口令由站长在环境变量中设定，前端不可见。
+          联系馆长获取开门口令。
           <br />
-          演示环境口令：<code className="rounded bg-muted/50 px-1 text-gold">babel-library-2026</code>
+          办公室邮箱：<code className="rounded bg-muted/50 px-1 text-gold">liushulin@azad.asia</code>
         </p>
         <button
           onClick={() => setView({ name: "home" })}
