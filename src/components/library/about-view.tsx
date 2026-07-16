@@ -256,10 +256,10 @@ export function AboutView() {
 
         <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
-            <Mail className="h-3.5 w-3.5" /> librarian@babel.library
+            <Mail className="h-3.5 w-3.5" /> liushulin@azad.asia
           </span>
           <span className="flex items-center gap-1">
-            <Github className="h-3.5 w-3.5" /> /babel-library
+            <Github className="h-3.5 w-3.5" /> Azad-sl/The-Library-of-Babel
           </span>
         </div>
       </div>
