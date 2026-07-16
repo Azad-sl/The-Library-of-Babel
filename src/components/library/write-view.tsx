@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Post } from "@/lib/types";
+import { generateCoverDataUrl } from "@/lib/cover-generator";
 
 const HEXAGON_PRESETS = ["随笔", "读书笔记", "思辨", "札记", "书信", "未分类"];
 
@@ -306,42 +307,21 @@ export function WriteView({ slug }: { slug?: string }) {
               onClick={async () => {
                 setGeneratingCover(true);
                 try {
-                  const res = await fetch("/api/generate-cover", {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                      ...(getAdminToken()
-                        ? { Authorization: `Bearer ${getAdminToken()}` }
-                        : {}),
-                    },
-                    body: JSON.stringify({
-                      title: title.trim(),
-                      excerpt: excerpt.trim(),
-                      hexagon,
-                    }),
+                  // 纯前端 Canvas 生成封面 —— 不依赖任何 AI 服务或密钥，
+                  // Vercel 上零配置可用。基于标题哈希确定性生成独一无二的设计。
+                  await new Promise((r) => setTimeout(r, 300)); // 给 UI 一点动画时间
+                  const dataUrl = generateCoverDataUrl({
+                    title: title.trim(),
+                    excerpt: excerpt.trim(),
+                    hexagon,
                   });
-                  if (res.status === 401) {
-                    toast.error("需要馆长口令才能生成封面", {
-                      description: "即将跳转到馆长办公室",
-                    });
-                    clearAdminToken();
-                    setTimeout(() => setView({ name: "admin" }), 1200);
-                    return;
-                  }
-                  const data = await res.json();
-                  if (data.success) {
-                    setCoverImage(data.imageUrl);
-                    toast.success("封面已生成", {
-                      description: "AI 根据标题与提要生成了专属封面",
-                    });
-                  } else {
-                    toast.error("封面生成失败", {
-                      description: data.error || "请稍后重试",
-                    });
-                  }
+                  setCoverImage(dataUrl);
+                  toast.success("封面已生成", {
+                    description: "根据标题与分类生成专属文学封面",
+                  });
                 } catch (err: any) {
                   toast.error("封面生成失败", {
-                    description: err?.message || "网络错误",
+                    description: err?.message || "请稍后重试",
                   });
                 } finally {
                   setGeneratingCover(false);
@@ -355,7 +335,7 @@ export function WriteView({ slug }: { slug?: string }) {
                 <Wand2 className="h-3.5 w-3.5" />
               )}
               <span className="font-body-serif text-xs">
-                {generatingCover ? "生成中…" : "AI 生成"}
+                {generatingCover ? "生成中…" : "生成封面"}
               </span>
             </Button>
           </div>
@@ -378,7 +358,7 @@ export function WriteView({ slug }: { slug?: string }) {
           )}
           {!coverImage.trim() && (
             <p className="mt-1 text-xs text-muted-foreground">
-              点击「AI 生成」根据标题自动生成封面，或手动输入 /covers/ 前缀引用本地封面。
+              点击「生成封面」根据标题与分类自动生成专属文学封面，或手动输入图片 URL。
             </p>
           )}
         </div>
