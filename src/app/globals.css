@@ -1,0 +1,1413 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* 巴别图书馆 · Library of Babel stylesheet */
+
+@custom-variant dark (&:is(.dark *, .candlelight *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-serif-display);
+  --font-body: var(--font-body-serif);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-gold: var(--gold);
+  --color-parchment: var(--parchment);
+  --color-ink: var(--ink);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* Light: parchment library — aged paper under candlelight */
+  --radius: 0.5rem;
+  --background: oklch(0.965 0.012 75);          /* aged parchment */
+  --foreground: oklch(0.22 0.02 50);            /* deep ink brown */
+  --card: oklch(0.985 0.008 80);                /* fresh paper */
+  --card-foreground: oklch(0.22 0.02 50);
+  --popover: oklch(0.985 0.008 80);
+  --popover-foreground: oklch(0.22 0.02 50);
+  --primary: oklch(0.32 0.04 55);               /* leather brown */
+  --primary-foreground: oklch(0.96 0.01 80);
+  --secondary: oklch(0.92 0.015 70);
+  --secondary-foreground: oklch(0.28 0.03 55);
+  --muted: oklch(0.91 0.015 72);
+  --muted-foreground: oklch(0.45 0.02 55);
+  --accent: oklch(0.78 0.09 75);                /* candlelight gold */
+  --accent-foreground: oklch(0.25 0.03 55);
+  --destructive: oklch(0.55 0.18 28);
+  --border: oklch(0.86 0.02 70);
+  --input: oklch(0.88 0.015 72);
+  --ring: oklch(0.65 0.08 70);
+  --gold: oklch(0.72 0.12 80);
+  --parchment: oklch(0.94 0.018 78);
+  --ink: oklch(0.22 0.02 50);
+  --chart-1: oklch(0.55 0.12 45);
+  --chart-2: oklch(0.5 0.08 180);
+  --chart-3: oklch(0.45 0.06 230);
+  --chart-4: oklch(0.7 0.13 80);
+  --chart-5: oklch(0.6 0.14 30);
+  --sidebar: oklch(0.95 0.012 76);
+  --sidebar-foreground: oklch(0.22 0.02 50);
+  --sidebar-primary: oklch(0.32 0.04 55);
+  --sidebar-primary-foreground: oklch(0.96 0.01 80);
+  --sidebar-accent: oklch(0.9 0.02 72);
+  --sidebar-accent-foreground: oklch(0.28 0.03 55);
+  --sidebar-border: oklch(0.86 0.02 70);
+  --sidebar-ring: oklch(0.65 0.08 70);
+}
+
+.dark {
+  /* Dark: midnight library — ink & candlelight */
+  --background: oklch(0.16 0.012 55);           /* deep ink-brown black */
+  --foreground: oklch(0.92 0.015 80);           /* warm parchment text */
+  --card: oklch(0.2 0.014 55);
+  --card-foreground: oklch(0.92 0.015 80);
+  --popover: oklch(0.2 0.014 55);
+  --popover-foreground: oklch(0.92 0.015 80);
+  --primary: oklch(0.78 0.1 78);                /* candlelight gold */
+  --primary-foreground: oklch(0.18 0.012 55);
+  --secondary: oklch(0.25 0.015 55);
+  --secondary-foreground: oklch(0.9 0.015 80);
+  --muted: oklch(0.24 0.013 55);
+  --muted-foreground: oklch(0.66 0.02 70);
+  --accent: oklch(0.35 0.025 55);
+  --accent-foreground: oklch(0.9 0.015 80);
+  --destructive: oklch(0.65 0.18 25);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.68 0.09 78);
+  --gold: oklch(0.75 0.13 82);
+  --parchment: oklch(0.9 0.02 78);
+  --ink: oklch(0.14 0.01 55);
+  --chart-1: oklch(0.7 0.13 80);
+  --chart-2: oklch(0.6 0.1 180);
+  --chart-3: oklch(0.55 0.08 230);
+  --chart-4: oklch(0.72 0.14 30);
+  --chart-5: oklch(0.65 0.12 45);
+  --sidebar: oklch(0.18 0.013 55);
+  --sidebar-foreground: oklch(0.92 0.015 80);
+  --sidebar-primary: oklch(0.78 0.1 78);
+  --sidebar-primary-foreground: oklch(0.18 0.012 55);
+  --sidebar-accent: oklch(0.25 0.015 55);
+  --sidebar-accent-foreground: oklch(0.9 0.015 80);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.68 0.09 78);
+}
+
+.candlelight {
+  /* Candlelight: warm amber glow — reading by candlelight in the scriptorium */
+  --background: oklch(0.19 0.025 55);           /* warm dark amber-black */
+  --foreground: oklch(0.91 0.04 82);            /* warm candlelit text */
+  --card: oklch(0.23 0.03 55);                  /* slightly lighter amber */
+  --card-foreground: oklch(0.88 0.04 80);
+  --popover: oklch(0.23 0.03 55);
+  --popover-foreground: oklch(0.88 0.04 80);
+  --primary: oklch(0.82 0.14 75);               /* bright candle gold */
+  --primary-foreground: oklch(0.16 0.025 55);
+  --secondary: oklch(0.28 0.03 55);
+  --secondary-foreground: oklch(0.85 0.035 80);
+  --muted: oklch(0.26 0.028 55);
+  --muted-foreground: oklch(0.74 0.04 75);
+  --accent: oklch(0.38 0.04 55);
+  --accent-foreground: oklch(0.88 0.04 80);
+  --destructive: oklch(0.65 0.18 25);
+  --border: oklch(0.82 0.08 75 / 25%);
+  --input: oklch(0.82 0.08 75 / 28%);
+  --ring: oklch(0.82 0.14 78);
+  --gold: oklch(0.82 0.16 78);                  /* brighter, more saturated candle gold */
+  --parchment: oklch(0.85 0.04 78);
+  --ink: oklch(0.16 0.02 55);
+  --chart-1: oklch(0.75 0.14 80);
+  --chart-2: oklch(0.65 0.1 180);
+  --chart-3: oklch(0.58 0.08 230);
+  --chart-4: oklch(0.78 0.16 30);
+  --chart-5: oklch(0.68 0.12 45);
+  --sidebar: oklch(0.21 0.027 55);
+  --sidebar-foreground: oklch(0.88 0.04 80);
+  --sidebar-primary: oklch(0.82 0.14 75);
+  --sidebar-primary-foreground: oklch(0.16 0.025 55);
+  --sidebar-accent: oklch(0.28 0.03 55);
+  --sidebar-accent-foreground: oklch(0.88 0.04 80);
+  --sidebar-border: oklch(0.82 0.08 75 / 20%);
+  --sidebar-ring: oklch(0.82 0.14 78);
+}
+
+/* Candlelight texture - warm amber glow spots */
+.candlelight .ink-texture {
+  background-image:
+    radial-gradient(circle at 15% 20%, oklch(0.82 0.16 78 / 0.1) 0, transparent 45%),
+    radial-gradient(circle at 85% 80%, oklch(0.75 0.12 70 / 0.08) 0, transparent 50%),
+    radial-gradient(circle at 50% 50%, oklch(0.7 0.08 60 / 0.06) 0, transparent 70%);
+}
+
+/* Candlelight drop-cap - slightly different gold with glow */
+.candlelight .prose-babel > p:first-of-type::first-letter,
+.candlelight .drop-cap::first-letter {
+  text-shadow: 0 0 8px oklch(0.82 0.16 78 / 0.5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body-serif), Georgia, "Times New Roman", serif;
+    font-feature-settings: "kern", "liga", "onum";
+  }
+  ::selection {
+    background: var(--gold);
+    color: var(--ink);
+  }
+}
+
+/* ---- Library of Babel custom utilities & textures ---- */
+
+.font-serif-display {
+  font-family: var(--font-serif-display), "Cormorant Garamond", Georgia, serif;
+}
+
+.font-body-serif {
+  font-family: var(--font-body-serif), "EB Garamond", Georgia, serif;
+}
+
+/* Aged paper texture for light mode */
+.paper-texture {
+  background-image:
+    radial-gradient(circle at 20% 30%, oklch(0.86 0.03 70 / 0.18) 0, transparent 50%),
+    radial-gradient(circle at 80% 70%, oklch(0.82 0.04 60 / 0.14) 0, transparent 50%),
+    radial-gradient(circle at 50% 50%, oklch(0.9 0.02 78 / 0.1) 0, transparent 70%);
+}
+
+/* Midnight ink texture for dark mode */
+.ink-texture {
+  background-image:
+    radial-gradient(circle at 15% 20%, oklch(0.78 0.1 78 / 0.06) 0, transparent 45%),
+    radial-gradient(circle at 85% 80%, oklch(0.7 0.08 70 / 0.05) 0, transparent 50%),
+    radial-gradient(circle at 50% 50%, oklch(0.65 0.06 60 / 0.04) 0, transparent 70%);
+}
+
+/* Subtle vignette around the reading pane */
+.vignette {
+  box-shadow: inset 0 0 120px 20px oklch(0 0 0 / 0.25);
+}
+
+/* Drop-cap for the first paragraph of a volume */
+.drop-cap::first-letter,
+.prose-babel > p:first-of-type::first-letter {
+  font-family: var(--font-serif-display), "Cormorant Garamond", serif;
+  float: left;
+  font-size: 3.8rem;
+  line-height: 0.78;
+  padding: 0.32rem 0.75rem 0.1rem 0.05rem;
+  margin-right: 0.15rem;
+  color: var(--gold);
+  font-weight: 600;
+  text-shadow:
+    0 0 1px color-mix(in oklch, var(--gold) 60%, transparent),
+    0 2px 6px color-mix(in oklch, var(--gold) 30%, transparent);
+  transition: color 0.3s ease;
+}
+
+.drop-cap:hover::first-letter,
+.prose-babel > p:first-of-type:hover::first-letter {
+  color: color-mix(in oklch, var(--gold) 90%, #fff 10%);
+}
+
+/* TOC active link */
+.toc-link {
+  position: relative;
+  transition: color 0.2s, padding-left 0.2s;
+}
+.toc-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.4em;
+  width: 2px;
+  height: 0.9em;
+  background: var(--gold);
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: 2px;
+}
+.toc-link.active {
+  color: var(--gold);
+  padding-left: 0.75rem;
+}
+.toc-link.active::before {
+  opacity: 1;
+}
+
+/* Hexagon clip-path helpers */
+.hex-clip {
+  clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+}
+
+.hex-clip-pointy {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* Animated drifting stars / dust motes in the background */
+@keyframes drift {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translate(var(--dx, 40px), var(--dy, -60px)); opacity: 0; }
+}
+
+.mote {
+  animation: drift var(--dur, 12s) linear infinite;
+}
+
+/* Slow rotation for ornamental hexagons */
+@keyframes slow-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.slow-spin { animation: slow-spin 120s linear infinite; }
+.slow-spin-rev { animation: slow-spin 160s linear infinite reverse; }
+
+/* Pulse for the candle flame */
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  25% { opacity: 0.85; transform: scale(0.97); }
+  50% { opacity: 0.95; transform: scale(1.02); }
+  75% { opacity: 0.8; transform: scale(0.98); }
+}
+.flicker { animation: flicker 2.4s ease-in-out infinite; }
+
+/* Custom scrollbar — leather & gold */
+.scroll-leather {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+.scroll-leather::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-leather::-webkit-scrollbar-track { background: transparent; }
+.scroll-leather::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--gold), var(--accent));
+  border-radius: 999px;
+}
+.scroll-leather::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* Prose for volume reading — Babel reading room */
+.prose-babel {
+  font-family: var(--font-body-serif), "EB Garamond", Georgia, serif;
+  font-size: 1.185rem;
+  line-height: 1.92;
+  color: var(--foreground);
+  letter-spacing: 0.003em;
+}
+.prose-babel h1, .prose-babel h2, .prose-babel h3, .prose-babel h4 {
+  font-family: var(--font-serif-display), "Cormorant Garamond", Georgia, serif;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+  line-height: 1.2;
+}
+.prose-babel h1 { font-size: 2.4rem; }
+.prose-babel h2 { font-size: 1.9rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+.prose-babel h3 { font-size: 1.5rem; }
+.prose-babel p { margin: 1.15em 0; }
+.prose-babel a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-color: oklch(0.72 0.12 80 / 0.4);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+.prose-babel a:hover { text-decoration-color: var(--gold); }
+.prose-babel blockquote {
+  border-left: 3px solid var(--gold);
+  padding: 0.2em 0 0.2em 1.3em;
+  margin: 1.6em 0;
+  font-style: italic;
+  color: var(--muted-foreground);
+  font-size: 1.12rem;
+}
+.prose-babel code {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9em;
+  background: var(--muted);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  color: var(--gold);
+}
+.prose-babel pre {
+  background: var(--ink);
+  color: var(--parchment);
+  padding: 1.2em 1.4em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.4em 0;
+  border: 1px solid var(--border);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.prose-babel pre code { background: transparent; padding: 0; color: inherit; }
+.prose-babel ul, .prose-babel ol { margin: 1.1em 0; padding-left: 1.6em; }
+.prose-babel li { margin: 0.4em 0; }
+.prose-babel ul li::marker { color: var(--gold); }
+.prose-babel ol li::marker { color: var(--gold); font-family: var(--font-serif-display); }
+.prose-babel hr {
+  border: none;
+  text-align: center;
+  margin: 2.6em 0;
+  color: var(--gold);
+  height: 1.4em;
+  position: relative;
+}
+.prose-babel hr::before {
+  content: "❖  ❖  ❖";
+  letter-spacing: 0.4em;
+  font-size: 0.9rem;
+  color: var(--gold);
+  opacity: 0.7;
+}
+.prose-babel img { border-radius: 8px; margin: 1.6em auto; display: block; max-width: 100%; border: 1px solid var(--border); }
+.prose-babel table { width: 100%; border-collapse: collapse; margin: 1.4em 0; font-size: 1rem; }
+.prose-babel th, .prose-babel td { border: 1px solid var(--border); padding: 0.6em 0.9em; text-align: left; }
+.prose-babel th { background: var(--muted); color: var(--gold); font-family: var(--font-serif-display); }
+
+/* Card catalog index-tab look */
+.catalog-tab {
+  position: relative;
+}
+.catalog-tab::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 1.2rem;
+  width: 2.6rem;
+  height: 0.6rem;
+  background: var(--gold);
+  border-radius: 0 0 4px 4px;
+  opacity: 0.85;
+}
+
+/* Fade/slide in on view */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise-in { animation: rise-in 0.6s ease-out both; }
+
+/* Smooth page transition between views */
+@keyframes view-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.view-fade-in { animation: view-fade-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Reading room ambiance — subtle warm gradient behind prose content */
+.prose-ambiance {
+  position: relative;
+}
+.prose-ambiance::before {
+  content: "";
+  position: absolute;
+  inset: -2rem;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    oklch(0.82 0.14 78 / 0.04) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Old film grain over hero */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Enhanced micro-interactions & visual details ---- */
+
+/* Smooth page transition between views */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(20px) scale(0.995); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.page-enter { animation: page-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Page flip animation for Babel generator */
+@keyframes page-flip {
+  0% { opacity: 0; transform: perspective(800px) rotateY(-8deg) scale(0.97); }
+  40% { opacity: 1; transform: perspective(800px) rotateY(2deg) scale(1.01); }
+  100% { opacity: 1; transform: perspective(800px) rotateY(0deg) scale(1); }
+}
+.page-flip { animation: page-flip 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .page-flip { animation: none; }
+}
+
+/* Staggered children animation */
+@keyframes stagger-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.stagger-in > * {
+  animation: stagger-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.stagger-in > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-in > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-in > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-in > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-in > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-in > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-in > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-in > *:nth-child(8) { animation-delay: 0.4s; }
+.stagger-in > *:nth-child(n+9) { animation-delay: 0.45s; }
+
+/* Candlelight ambient glow animation for hero sections */
+@keyframes candle-glow {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 8px oklch(0.75 0.13 82 / 0.3)); }
+  33% { filter: brightness(1.05) drop-shadow(0 0 14px oklch(0.78 0.14 82 / 0.4)); }
+  66% { filter: brightness(0.97) drop-shadow(0 0 6px oklch(0.72 0.12 82 / 0.25)); }
+}
+.candle-glow { animation: candle-glow 4s ease-in-out infinite; }
+
+/* Ink blot reveal for headings */
+@keyframes ink-reveal {
+  from { opacity: 0; filter: blur(3px); }
+  to { opacity: 1; filter: blur(0); }
+}
+.ink-reveal { animation: ink-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Shimmer effect for loading states and decorative gold lines
+   Tuned to stay legible: peak is only ~15% lighter than base gold,
+   not a near-white wash that obscures text on dark backgrounds. */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer-gold {
+  /* inline-block required so background-clip: text actually clips to glyphs
+     on inline spans in current Chromium (otherwise falls back to border-box). */
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    color-mix(in oklch, var(--gold) 70%, oklch(0.92 0.14 80) 30%) 25%,
+    var(--gold) 50%,
+    color-mix(in oklch, var(--gold) 70%, oklch(0.92 0.14 80) 30%) 75%,
+    var(--gold) 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 4s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Subtle warm glow so the text always reads as "gold" even between sweeps */
+  filter: drop-shadow(0 0 1px color-mix(in oklch, var(--gold) 35%, transparent));
+}
+
+/* Decorative gold divider with ornaments */
+.gold-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--gold);
+  opacity: 0.5;
+  margin: 2rem 0;
+}
+.gold-divider::before,
+.gold-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold) 20%,
+    var(--gold) 80%,
+    transparent
+  );
+}
+
+/* Book spine hover effect for volume cards */
+@keyframes spine-tilt {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(-4deg); }
+}
+
+/* Quill writing animation for the compose view */
+@keyframes quill-write {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  25% { transform: rotate(1deg) translateY(-1px); }
+  50% { transform: rotate(-1deg) translateY(0); }
+  75% { transform: rotate(2deg) translateY(-1px); }
+}
+.quill-write { animation: quill-write 2s ease-in-out infinite; }
+
+/* Page curl / paper fold shadow for volume cards */
+.paper-fold {
+  position: relative;
+}
+.paper-fold::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    oklch(0 0 0 / 0.08) 50%
+  );
+  border-radius: 0 0 8px 0;
+  pointer-events: none;
+}
+
+/* Floating label effect for form fields */
+.float-label {
+  position: relative;
+}
+.float-label label {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+.float-label input:focus + label,
+.float-label input:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  color: var(--gold);
+  background: var(--card);
+  padding: 0 0.25rem;
+}
+
+/* Hexagonal watermark pattern for card backgrounds */
+.hex-watermark {
+  position: relative;
+  overflow: hidden;
+}
+.hex-watermark::before {
+  content: "⬡";
+  position: absolute;
+  right: -10%;
+  bottom: -5%;
+  font-size: 12rem;
+  opacity: 0.04;
+  color: var(--gold);
+  transform: rotate(15deg);
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.hex-watermark:hover::before {
+  opacity: 0.08;
+}
+
+/* Reading progress bar with warm gradient */
+.progress-warm {
+  background: linear-gradient(
+    90deg,
+    oklch(0.7 0.12 45),
+    var(--gold),
+    oklch(0.78 0.15 85)
+  );
+}
+
+/* Typing cursor blink for the Babel generator */
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Focus ring with gold glow for accessibility */
+.focus-gold:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px oklch(0.75 0.13 82 / 0.25);
+}
+
+/* Elegant underline animation for links */
+.elegant-underline {
+  position: relative;
+  text-decoration: none;
+}
+.elegant-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.elegant-underline:hover::after {
+  width: 100%;
+}
+
+/* Badge pulse for notification counts */
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.75 0.13 82 / 0.4); }
+  50% { box-shadow: 0 0 0 4px oklch(0.75 0.13 82 / 0); }
+}
+.badge-pulse { animation: badge-pulse 2s ease-in-out infinite; }
+
+/* Scroll indicator fade-out at top of reading view */
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--background), transparent);
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.scroll-indicator.visible { opacity: 1; }
+
+/* Tooltip theme override for dark library aesthetic */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--ink);
+  color: var(--parchment);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-family: var(--font-body-serif), Georgia, serif;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.2s;
+  border: 1px solid oklch(0.75 0.13 82 / 0.3);
+  z-index: 100;
+}
+[data-tooltip]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Candlelight mode-specific enhanced glow */
+.candlelight .candle-glow {
+  animation-duration: 3s;
+}
+.candlelight .shimmer-gold {
+  animation-duration: 2.5s;
+}
+
+/* ---- Library Ledger · About-page data visualization styles ---- */
+
+/* Hexagonal-endcap bar fill for the HexagonBarChart */
+.hex-bar-fill {
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--gold) 55%, transparent),
+    var(--gold)
+  );
+  /* pointy hex-style right cap */
+  clip-path: polygon(
+    0% 0%,
+    calc(100% - 10px) 0%,
+    100% 50%,
+    calc(100% - 10px) 100%,
+    0% 100%
+  );
+  box-shadow: inset 0 0 0 1px
+    color-mix(in oklch, var(--gold) 35%, transparent);
+}
+.hex-bar-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--gold) 25%, transparent) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: hex-shimmer 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes hex-shimmer {
+  0%, 100% { background-position: -200% 0; }
+  50% { background-position: 200% 0; }
+}
+
+/* Sparkline draw-in animations for MonthlyTrendSparkline */
+.spark-line-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: spark-draw 1.6s ease-out 0.1s forwards;
+}
+.spark-area-draw {
+  opacity: 0;
+  animation: spark-fade 1.2s ease-out 0.7s forwards;
+}
+.spark-dot {
+  opacity: 0;
+  animation: spark-fade 0.4s ease-out forwards;
+}
+@keyframes spark-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes spark-fade {
+  to { opacity: 1; }
+}
+
+/* Print styles for reading — produces a clean, paper-friendly
+   layout when the reader prints a volume or saves it as PDF.
+   Belt-and-suspenders: most chrome already carries `print:hidden`
+   in the JSX; the rules below catch the rest and reformat the
+   article typography for paper (serif, black on white, page breaks). */
+@page {
+  margin: 2cm;
+}
+
+@media print {
+  /* ---- Hide all non-article chrome ------------------------------------ */
+  header,
+  footer,
+  nav,
+  aside,
+  .library-background,
+  .mote,
+  .grain::after,
+  /* Any element pinned to the viewport (progress bar, FABs, mobile
+     font-size widget, mobile TOC trigger, command palette, toasts) */
+  .fixed,
+  /* Sheet/dialog overlays (mobile menu, TOC drawer) */
+  [role="dialog"],
+  [data-sonner-toaster],
+  [data-radix-popper-content-wrapper] {
+    display: none !important;
+  }
+
+  /* Belt-and-suspenders: comments, related volumes, and the
+     "继续漫游" CTA in volume-view already carry `print:hidden`
+     in the JSX, so they will be hidden via the rule above. The
+     article title, breadcrumb, content, and tags remain visible. */
+
+  /* Force the desktop 2-column grid (TOC + article) into a single
+     column for paper. Tailwind's `lg:grid` only activates at
+     min-width:1024px; in print we always want a single column. */
+  .lg\:grid {
+    display: block !important;
+  }
+
+  /* ---- Paper background & text --------------------------------------- */
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  body {
+    font-family: var(--font-body-serif), "EB Garamond", Georgia, serif !important;
+  }
+
+  /* ---- Article container — full width, no theme padding -------------- */
+  main,
+  article {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* ---- Article typography for paper ---------------------------------- */
+  .prose-babel {
+    font-family: var(--font-serif-display), "Cormorant Garamond", "EB Garamond",
+      Georgia, serif !important;
+    font-size: 12pt !important;
+    line-height: 1.8 !important;
+    color: #000000 !important;
+    background: transparent !important;
+    text-shadow: none !important;
+  }
+
+  .prose-babel p,
+  .prose-babel li,
+  .prose-babel blockquote,
+  .prose-babel td,
+  .prose-babel th {
+    color: #000000 !important;
+  }
+
+  .prose-babel a {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+
+  .prose-babel a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555 !important;
+  }
+
+  /* Headings — keep together, don't break right after */
+  .prose-babel h1,
+  .prose-babel h2,
+  .prose-babel h3,
+  .prose-babel h4 {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    page-break-after: avoid;
+    break-after: avoid;
+    color: #000000 !important;
+  }
+
+  .prose-babel h2 {
+    border-bottom: 1px solid #666 !important;
+    padding-bottom: 0.25em;
+  }
+
+  /* Blockquotes — subtle gray instead of theme gold */
+  .prose-babel blockquote {
+    border-left-color: #888 !important;
+    color: #333 !important;
+    background: transparent !important;
+  }
+
+  /* Inline code & code blocks — black on light gray */
+  .prose-babel code,
+  .prose-babel pre {
+    background: #f4f4f4 !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+    text-shadow: none !important;
+  }
+
+  /* Horizontal rules — subtle gray */
+  .prose-babel hr {
+    border-color: #999 !important;
+  }
+
+  /* ---- Decorative elements — print with subtle color ----------------- */
+  /* Drop-cap: keep the flourish but desaturate from bright gold to
+     near-black so it reads cleanly on paper. */
+  .prose-babel > p:first-of-type::first-letter,
+  .drop-cap::first-letter {
+    color: #1a1a1a !important;
+    text-shadow: none !important;
+    font-family: var(--font-serif-display), Georgia, serif !important;
+  }
+
+  /* Gold divider — print as a thin gray rule with the ❖ ornament */
+  .gold-divider,
+  .gold-divider span {
+    color: #666 !important;
+  }
+
+  /* Article title block — center, neutral, no decorative glow.
+     The `header` selector above hides the page header.tsx; this rule
+     keeps the article's own <header> (title + meta) visible. The
+     `display: block` overrides the earlier `header { display: none }`. */
+  article > header {
+    display: block !important;
+    text-align: center !important;
+    border-bottom: 1px solid #999 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    text-shadow: none !important;
+  }
+
+  article > header [class*="text-gold"],
+  article > header .text-gold\/80,
+  article > header .text-gold\/70,
+  article > header .text-gold\/40 {
+    color: #333 !important;
+  }
+
+  article > header .bg-gradient-to-r,
+  article > header .bg-gradient-to-l {
+    background: #999 !important;
+  }
+
+  /* Tags row — keep visible, neutral */
+  article .mt-10.flex.flex-wrap.items-center.gap-2 {
+    color: #333 !important;
+  }
+
+  article .mt-10.flex.flex-wrap.items-center.gap-2 button {
+    color: #333 !important;
+    border-color: #999 !important;
+  }
+
+  /* Breadcrumb row — visible but neutral */
+  .text-muted-foreground,
+  [class*="text-muted-foreground"] {
+    color: #444 !important;
+  }
+
+  /* Images — fit within page width, don't break across pages */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Tables & figures — keep rows together */
+  table,
+  figure,
+  pre {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ---- Kill all animation & shadow on paper -------------------------- */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+
+/* ---- Reading-time ruler · volume view TOC sidebar --------------------- */
+/* A horizontal bar of N gold tick marks (one per reading minute, capped at
+   20 segments). Filled ticks are solid gold, the current tick pulses with
+   the candle-glow animation, empty ticks are thin gold outlines. A small
+   italic label below reads "已读 X / Y 分钟". Hovering the ruler reveals a
+   tooltip listing every minute marker ("1min · 2min · … · Ymin"). */
+
+.reading-ruler {
+  position: relative;
+}
+.reading-ruler-seg {
+  flex: 1 1 0;
+  height: 12px;
+  min-width: 3px;
+  max-width: 6px;
+  border-radius: 1px;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.reading-ruler-seg-filled {
+  background: var(--gold);
+  box-shadow: 0 0 4px color-mix(in oklch, var(--gold) 45%, transparent);
+}
+.reading-ruler-seg-current {
+  background: color-mix(in oklch, var(--gold) 70%, transparent);
+  box-shadow: 0 0 6px color-mix(in oklch, var(--gold) 55%, transparent);
+  animation: candle-glow 4s ease-in-out infinite;
+}
+.reading-ruler-seg-empty {
+  background: transparent;
+  border: 1px solid color-mix(in oklch, var(--gold) 30%, transparent);
+}
+/* Hover tooltip — appears above the ruler, lists every minute marker */
+.reading-ruler-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--background);
+  color: var(--gold);
+  border: 1px solid color-mix(in oklch, var(--gold) 35%, transparent);
+  padding: 0.3rem 0.55rem;
+  border-radius: 4px;
+  font-family: var(--font-body-serif), Georgia, serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 30;
+  box-shadow: 0 4px 14px -4px oklch(0 0 0 / 0.45);
+}
+.reading-ruler:hover .reading-ruler-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ---- Bookmark ribbon · volume cards ----------------------------------- */
+/* A small gold ribbon in the top-right corner of volume cards, shown when
+   the reader has saved progress for that volume. Gently sways using a
+   4s ease-in-out infinite animation (rotating ±3°). Hovering the parent
+   card reveals a small "读到 X%" tooltip below the ribbon. */
+
+.bookmark-ribbon {
+  display: block;
+  width: 18px;
+  height: 27px;
+  transform-origin: top center;
+  animation: bookmark-sway 4s ease-in-out infinite;
+  filter: drop-shadow(0 1px 2px oklch(0 0 0 / 0.35));
+}
+@keyframes bookmark-sway {
+  0%   { transform: rotate(-3deg); }
+  50%  { transform: rotate(3deg); }
+  100% { transform: rotate(-3deg); }
+}
+.bookmark-ribbon-tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: -6px;
+  background: var(--background);
+  color: var(--gold);
+  border: 1px solid color-mix(in oklch, var(--gold) 35%, transparent);
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  font-family: var(--font-body-serif), Georgia, serif;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: 0 4px 12px -4px oklch(0 0 0 / 0.4);
+}
+
+/* Reduce motion preference — disable ruler pulse + ribbon sway */
+@media (prefers-reduced-motion: reduce) {
+  .reading-ruler-seg-current { animation: none; }
+  .bookmark-ribbon { animation: none; }
+  mark.babel-highlight.babel-highlight-flash { animation: none; }
+}
+
+/* ---- Margin Notes: text highlights & annotations ----
+   Applied to <mark class="babel-highlight" data-highlight-id data-note?>
+   elements inserted into the prose by the HighlightRenderer. */
+
+/* Highlighted text — subtle gold tint that doesn't overwhelm the serif body */
+mark.babel-highlight {
+  background: color-mix(in oklch, var(--gold) 35%, transparent);
+  color: var(--foreground);
+  border-bottom: 1px dotted var(--gold);
+  padding: 0.05em 0.1em;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  /* Don't inherit any italic from blockquotes — highlights read as upright */
+  font-style: normal;
+  /* Avoid the browser's default yellow <mark> styling */
+  -webkit-text-emphasis: none;
+}
+mark.babel-highlight:hover {
+  background: color-mix(in oklch, var(--gold) 50%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--gold) 40%, transparent);
+}
+
+/* CSS-only tooltip showing the note on hover (when a data-note exists) */
+mark.babel-highlight[data-note] {
+  position: relative;
+}
+mark.babel-highlight[data-note]::after {
+  content: attr(data-note);
+  position: absolute;
+  /* Place below the mark */
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--ink);
+  color: var(--parchment);
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  font-family: var(--font-body-serif), Georgia, serif;
+  font-style: italic;
+  max-width: 240px;
+  width: max-content;
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  border: 1px solid color-mix(in oklch, var(--gold) 35%, transparent);
+  box-shadow: 0 6px 24px -6px oklch(0 0 0 / 0.5);
+  z-index: 60;
+}
+mark.babel-highlight[data-note]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+/* Tiny caret under the tooltip pointing up at the mark */
+mark.babel-highlight[data-note]::before {
+  content: "";
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid color-mix(in oklch, var(--gold) 35%, transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  z-index: 60;
+}
+mark.babel-highlight[data-note]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Brief flash animation when scrolling to a highlight from the marginalia sidebar */
+@keyframes babel-highlight-flash {
+  0%, 100% {
+    background: color-mix(in oklch, var(--gold) 35%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--gold) 0%, transparent);
+  }
+  20%, 60% {
+    background: color-mix(in oklch, var(--gold) 65%, transparent);
+    box-shadow: 0 0 0 6px color-mix(in oklch, var(--gold) 25%, transparent);
+  }
+}
+mark.babel-highlight.babel-highlight-flash {
+  animation: babel-highlight-flash 1.2s ease-out;
+}
+
+/* Print: highlights become plain yellow markers (no interactivity) */
+@media print {
+  mark.babel-highlight {
+    background: #fff3a8 !important;
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  mark.babel-highlight::before,
+  mark.babel-highlight::after { display: none !important; }
+}
+
+/* ----------------------------------------------------------------------------
+ * Task 18-a: Volume view enhancements
+ *   - Reading-session timer pulse
+ *   - Literary-siblings card stagger + hover glow
+ *   - Citation preview paper-texture
+ * -------------------------------------------------------------------------- */
+
+/* Soft pulse for the timer icon while the session is running.
+   Lighter than `candle-glow` so it doesn't compete with the prose. */
+@keyframes reading-timer-pulse {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 3px color-mix(in oklch, var(--gold) 35%, transparent));
+  }
+  50% {
+    opacity: 0.55;
+    filter: drop-shadow(0 0 8px color-mix(in oklch, var(--gold) 65%, transparent));
+  }
+}
+.reading-timer-pulse {
+  animation: reading-timer-pulse 1.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading-timer-pulse { animation: none; }
+}
+
+/* Literary Siblings section — staggered rise-in for each sibling card */
+.literary-siblings .sibling-card {
+  animation: rise-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.literary-siblings .sibling-card:nth-child(1) { animation-delay: 0.05s; }
+.literary-siblings .sibling-card:nth-child(2) { animation-delay: 0.12s; }
+.literary-siblings .sibling-card:nth-child(3) { animation-delay: 0.19s; }
+.literary-siblings .sibling-card:nth-child(n+4) { animation-delay: 0.26s; }
+@media (prefers-reduced-motion: reduce) {
+  .literary-siblings .sibling-card { animation: none; }
+}
+
+/* Citation preview — paper-texture + thin gold border so it reads as a
+   "bookplate" rather than a raw code block. The .paper-texture class is
+   already applied inline; this adds the gold-tinted outline + scroll style. */
+.citation-pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.citation-pre::-webkit-scrollbar { width: 6px; height: 6px; }
+.citation-pre::-webkit-scrollbar-track { background: transparent; }
+.citation-pre::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--gold) 40%, transparent);
+  border-radius: 3px;
+}
+.citation-pre::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* ----------------------------------------------------------------------------
+ * Task 18-b: About view — Reading Activity Heatmap
+ *   - .heat-cell hover: subtle gold outline + 1.25× scale so the reader can
+ *     pick out a single day among 126 cells. `position: relative` + z-index
+ *     keep the scaled cell above its neighbours.
+ *   - .heat-stat hover: gold-tinted border, matching the Library's cards.
+ *   - Reduced-motion: disable the entrance animations (rise-in / ink-reveal)
+ *     on the section and the cell hover transform.
+ * -------------------------------------------------------------------------- */
+
+.heat-cell {
+  transition: transform 0.12s ease, outline-color 0.12s ease;
+  outline: 1px solid transparent;
+  outline-offset: -1px;
+}
+.heat-cell:hover {
+  transform: scale(1.25);
+  outline-color: color-mix(in oklch, var(--gold) 55%, transparent);
+  position: relative;
+  z-index: 2;
+}
+
+.heat-section .heat-stat {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.heat-section .heat-stat:hover {
+  border-color: color-mix(in oklch, var(--gold) 35%, transparent);
+  background-color: color-mix(in oklch, var(--gold) 6%, var(--background));
+}
+
+/* Horizontally-scrollable heatmap track on narrow viewports */
+.heat-grid {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, var(--gold) 40%, transparent) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heat-section.rise-in,
+  .heat-section .ink-reveal { animation: none; }
+  .heat-cell { transition: none; }
+  .heat-cell:hover { transform: none; }
+}
+
+/* ---- Task 18-c: Quote of the Day card ───────────────────────────
+   A wide horizontal "bookplate" showing one curated literary quote
+   per day. Layered visual: aged-paper texture + faint gold radial glow
+   at the top-right + oversized gold 「 」 marks framing the text.
+   The quote text fades in on mount and on every "换一句" refresh. */
+
+/* Background: aged paper texture + subtle gold tint so the card reads
+   as a leaf of parchment under candlelight across all three themes. */
+.quote-of-the-day-bg {
+  background-color: color-mix(in oklch, var(--card) 70%, var(--background));
+  background-image:
+    radial-gradient(circle at 18% 28%, color-mix(in oklch, var(--gold) 6%, transparent) 0, transparent 55%),
+    radial-gradient(circle at 82% 72%, color-mix(in oklch, var(--gold) 4%, transparent) 0, transparent 55%),
+    radial-gradient(circle at 50% 50%, color-mix(in oklch, var(--gold) 3%, transparent) 0, transparent 75%);
+  backdrop-filter: blur(6px);
+}
+
+/* Oversized decorative 「 」 marks — sit behind the text, gold/15.
+   On light themes the marks fade further so they don't compete with
+   the parchment background. */
+.quote-mark {
+  font-weight: 600;
+  user-select: none;
+}
+:is(.light, .parchment) .quote-mark {
+  opacity: 0.85;
+}
+
+/* Fade-in for the quote body on mount + on every "换一句" refresh.
+   Triggered by changing the React `key` of the inner div. */
+@keyframes quote-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.quote-fade-in {
+  animation: quote-fade-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Refresh icon spins 180° on hover — a small tactile flourish. */
+.quote-refresh-icon {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.quote-action-btn:hover .quote-refresh-icon {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quote-of-the-day-card.rise-in { animation: none; }
+  .quote-fade-in { animation: none; }
+  .quote-refresh-icon { transition: none; }
+  .quote-action-btn:hover .quote-refresh-icon { transform: none; }
+}
+
+/* ----------------------------------------------------------------------------
+ * Task 19-b: Reading Time Ring — about page donut + 7-day bar chart.
+ *   - .ring-segment: subtle stroke-width grow on hover so the reader can
+ *     highlight an individual hexagon's share.
+ *   - .reading-time-legend-row: gentle opacity dip on hover, matching the
+ *     heat-stat pattern from Task 18-b.
+ *   - .reading-time-bar: eased height transition so the bars feel "drawn"
+ *     when data first lands.
+ *   - prefers-reduced-motion: kill every transition above.
+ * -------------------------------------------------------------------------- */
+.reading-time-ring-svg .ring-segment {
+  transition: stroke-width 0.3s ease;
+  cursor: pointer;
+}
+.reading-time-ring-svg .ring-segment:hover {
+  stroke-width: 28;
+}
+
+.reading-time-legend-row {
+  transition: opacity 0.2s ease;
+}
+.reading-time-legend-row:hover {
+  opacity: 0.7;
+}
+
+.reading-time-bar {
+  transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-time-ring-svg .ring-segment { transition: none; cursor: default; }
+  .reading-time-ring-svg .ring-segment:hover { stroke-width: 22; }
+  .reading-time-legend-row { transition: none; }
+  .reading-time-bar { transition: none; }
+}

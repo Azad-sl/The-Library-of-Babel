@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      String   @default("librarian")
+  bio       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String?
+  content     String
+  coverImage  String?
+  hexagon     String   @default("未分类") // category — a hexagonal gallery of the library
+  published   Boolean  @default(true)
+  featured    Boolean  @default(false)
+  readMinutes Int      @default(5)
+  views       Int      @default(0)
+  likes       Int      @default(0)
+  authorId    String   @default("librarian")
+  authorName  String   @default("图书管理员")
+  tags        String   @default("") // comma-separated tags
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([hexagon])
+  @@index([published])
+  @@index([createdAt])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  postId    String
+  name      String
+  content   String
+  createdAt DateTime @default(now())
+
+  @@index([postId])
+}
+
+model BabelBookmark {
+  // A page in the Babel generator that the reader has bookmarked
+  id        String   @id @default(cuid())
+  address   String   @unique // hexagon-wall-shelf-volume-page
+  note      String?
+  createdAt DateTime @default(now())
+}
