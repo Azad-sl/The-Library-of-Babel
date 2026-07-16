@@ -27,6 +27,7 @@ import {
   ArrowUp,
   Highlighter,
   Keyboard,
+  KeyRound,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { emitShortcutsHelpOpen } from "@/lib/shortcuts-event";
@@ -77,6 +78,13 @@ const NAV_ITEMS: {
     view: { name: "write" },
     icon: Feather,
     shortcut: "⌘7",
+  },
+  {
+    label: "馆长办公室",
+    sub: "Admin",
+    view: { name: "admin" },
+    icon: KeyRound,
+    shortcut: "⌘8",
   },
 ];
 

@@ -21,6 +21,7 @@ import {
   Home,
   Menu,
   BookMarked,
+  KeyRound,
 } from "lucide-react";
 import type { View } from "@/lib/types";
 
@@ -123,6 +124,16 @@ export function Header() {
             <Feather className="h-3.5 w-3.5" />
             <span className="font-body-serif text-sm">执笔</span>
           </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => go({ name: "admin" })}
+            className="h-9 w-9 text-muted-foreground/50 transition-colors hover:text-gold"
+            aria-label="馆长办公室"
+            title="馆长办公室 (⌘8)"
+          >
+            <KeyRound className="h-4 w-4" />
+          </Button>
           <ThemeToggle />
 
           {/* Mobile menu */}
@@ -175,6 +186,18 @@ export function Header() {
                 >
                   <Feather className="h-4 w-4" />
                   <span className="font-body-serif text-base">执笔 · 写一卷</span>
+                </button>
+                <button
+                  onClick={() => go({ name: "admin" })}
+                  className="flex items-center gap-3 rounded-lg px-4 py-3 text-left text-muted-foreground/70 transition-colors hover:bg-accent/20 hover:text-gold"
+                >
+                  <KeyRound className="h-4 w-4" />
+                  <div className="flex flex-col">
+                    <span className="font-body-serif text-base">馆长办公室</span>
+                    <span className="text-[0.65rem] uppercase tracking-widest text-muted-foreground">
+                      Curator · ⌘8
+                    </span>
+                  </div>
                 </button>
               </nav>
               <p className="mt-8 px-4 font-body-serif text-xs italic leading-relaxed text-muted-foreground">

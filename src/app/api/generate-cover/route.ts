@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import ZAI from "z-ai-web-dev-sdk";
 import fs from "fs";
 import path from "path";
+import { requireAdmin } from "@/lib/auth";
 
 // Lazy-init ZAI singleton
 let zaiInstance: Awaited<ZAI> | null = null;
@@ -21,6 +22,12 @@ function ensureDirs() {
 
 export async function POST(request: Request) {
   try {
+    if (!requireAdmin(request)) {
+      return NextResponse.json(
+        { error: "未授权：需要馆长口令" },
+        { status: 401 }
+      );
+    }
     const body = await request.json();
     const { title, excerpt, hexagon } = body as {
       title?: string;

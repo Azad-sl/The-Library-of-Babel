@@ -22,6 +22,7 @@ import {
   Eye,
   Heart,
   Feather,
+  Edit3,
   MessageSquare,
   Send,
   ChevronRight,
@@ -705,6 +706,14 @@ export function VolumeView({ slug }: { slug: string }) {
                 title="打印 / 另存为 PDF"
               >
                 <Printer className="mr-2 h-4 w-4" /> 印刷版
+              </Button>
+              <Button
+                onClick={() => setView({ name: "write", slug: p.slug })}
+                variant="outline"
+                className="rounded-full border border-gold/40 bg-gold/5 px-5 text-gold transition-colors hover:bg-gold/15"
+                title="修订这一卷"
+              >
+                <Edit3 className="mr-2 h-4 w-4" /> 修订此卷
               </Button>
             </div>
 

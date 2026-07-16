@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { api } from "@/lib/api";
+import { api, ApiError, clearAdminToken, getAdminToken } from "@/lib/api";
 import { useLibrary } from "@/store/library-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -120,7 +120,15 @@ export function WriteView({ slug }: { slug?: string }) {
         setEditing(created);
       }
     } catch (e: any) {
-      toast.error("保存失败：" + (e?.message || ""));
+      if (e instanceof ApiError && e.status === 401) {
+        toast.error("会话已过期，请重新登录", {
+          description: "即将跳转到馆长办公室",
+        });
+        clearAdminToken();
+        setTimeout(() => setView({ name: "admin" }), 1200);
+      } else {
+        toast.error("保存失败：" + (e?.message || ""));
+      }
     } finally {
       setSaving(false);
     }
@@ -133,8 +141,14 @@ export function WriteView({ slug }: { slug?: string }) {
       await api.deletePost(editing.id);
       toast.success("已移出图书馆");
       setView({ name: "library" });
-    } catch {
-      toast.error("删除失败");
+    } catch (e: any) {
+      if (e instanceof ApiError && e.status === 401) {
+        toast.error("会话已过期，请重新登录");
+        clearAdminToken();
+        setView({ name: "admin" });
+      } else {
+        toast.error("删除失败");
+      }
     }
   };
 
@@ -294,13 +308,26 @@ export function WriteView({ slug }: { slug?: string }) {
                 try {
                   const res = await fetch("/api/generate-cover", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                      "Content-Type": "application/json",
+                      ...(getAdminToken()
+                        ? { Authorization: `Bearer ${getAdminToken()}` }
+                        : {}),
+                    },
                     body: JSON.stringify({
                       title: title.trim(),
                       excerpt: excerpt.trim(),
                       hexagon,
                     }),
                   });
+                  if (res.status === 401) {
+                    toast.error("需要馆长口令才能生成封面", {
+                      description: "即将跳转到馆长办公室",
+                    });
+                    clearAdminToken();
+                    setTimeout(() => setView({ name: "admin" }), 1200);
+                    return;
+                  }
                   const data = await res.json();
                   if (data.success) {
                     setCoverImage(data.imageUrl);

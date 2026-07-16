@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
+import { requireAdmin } from "@/lib/auth";
 
 // Select shape matching PostSummary (excludes full content)
 const postSummarySelect = {
@@ -51,9 +52,15 @@ export async function GET(request: Request) {
   }
 }
 
-// POST /api/posts  — create a post
+// POST /api/posts  — create a post (admin only)
 export async function POST(request: Request) {
   try {
+    if (!requireAdmin(request)) {
+      return NextResponse.json(
+        { error: "未授权：需要馆长口令" },
+        { status: 401 }
+      );
+    }
     const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
     const {
       title,

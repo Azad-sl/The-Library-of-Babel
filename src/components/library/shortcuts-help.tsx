@@ -27,6 +27,7 @@ const GROUPS: ShortcutGroup[] = [
       { keys: "⌘5", desc: "关于" },
       { keys: "⌘6", desc: "批注索引" },
       { keys: "⌘7", desc: "执笔" },
+      { keys: "⌘8", desc: "馆长办公室" },
     ],
   },
   {

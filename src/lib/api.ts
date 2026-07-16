@@ -9,14 +9,62 @@ import type {
   Comment,
 } from "@/lib/types";
 
+/* ------------------------------------------------------------------ */
+/*  Admin token storage (localStorage)                                 */
+/* ------------------------------------------------------------------ */
+const TOKEN_KEY = "babel-admin-token";
+
+export function getAdminToken(): string | null {
+  try {
+    return localStorage.getItem(TOKEN_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export function setAdminToken(token: string): void {
+  try {
+    localStorage.setItem(TOKEN_KEY, token);
+  } catch {
+    /* ignore */
+  }
+}
+
+export function clearAdminToken(): void {
+  try {
+    localStorage.removeItem(TOKEN_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
+/** Build headers, attaching the admin token for write requests. */
+function authHeaders(extra?: HeadersInit): HeadersInit {
+  const token = getAdminToken();
+  const h: Record<string, string> = { "Content-Type": "application/json" };
+  if (token) h["Authorization"] = `Bearer ${token}`;
+  if (extra) Object.assign(h, extra as Record<string, string>);
+  return h;
+}
+
+/** Error class carrying HTTP status, so callers can branch on 401. */
+export class ApiError extends Error {
+  status: number;
+  constructor(status: number, message: string) {
+    super(message);
+    this.status = status;
+    this.name = "ApiError";
+  }
+}
+
 async function jfetch<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, {
     ...init,
-    headers: { "Content-Type": "application/json", ...(init?.headers || {}) },
+    headers: authHeaders(init?.headers),
   });
   if (!res.ok) {
     const txt = await res.text().catch(() => "");
-    throw new Error(`${res.status} ${res.statusText} ${txt}`);
+    throw new ApiError(res.status, `${res.status} ${res.statusText} ${txt}`);
   }
   return res.json() as Promise<T>;
 }
@@ -75,4 +123,13 @@ export const api = {
     }),
 
   seed: () => jfetch<{ ok: boolean; count: number }>(`/api/seed`, { method: "POST" }),
+
+  /* ---- Auth ---- */
+  login: (password: string) =>
+    jfetch<{ token: string }>(`/api/auth`, {
+      method: "POST",
+      body: JSON.stringify({ password }),
+    }),
+
+  verifyToken: () => jfetch<{ valid: boolean }>(`/api/auth`, { method: "GET" }),
 };

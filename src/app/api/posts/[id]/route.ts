@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
+import { requireAdmin } from "@/lib/auth";
 
 // A Prisma cuid starts with 'c' and is ~24 base36 chars.
 function isCuid(id: string): boolean {
@@ -41,12 +42,18 @@ export async function GET(
   }
 }
 
-// PATCH /api/posts/[id]  — partial update
+// PATCH /api/posts/[id]  — partial update (admin only)
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    if (!requireAdmin(request)) {
+      return NextResponse.json(
+        { error: "未授权：需要馆长口令" },
+        { status: 401 }
+      );
+    }
     const { id } = await params;
     const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
 
@@ -91,12 +98,18 @@ export async function PATCH(
   }
 }
 
-// DELETE /api/posts/[id]
+// DELETE /api/posts/[id]  (admin only)
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    if (!requireAdmin(request)) {
+      return NextResponse.json(
+        { error: "未授权：需要馆长口令" },
+        { status: 401 }
+      );
+    }
     const { id } = await params;
 
     const existing = await db.post.findUnique({

@@ -128,4 +128,5 @@ export type View =
   | { name: "search"; query: string }
   | { name: "about" }
   | { name: "marginalia" }
-  | { name: "write"; slug?: string };
+  | { name: "write"; slug?: string }
+  | { name: "admin" };

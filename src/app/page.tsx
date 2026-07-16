@@ -13,6 +13,7 @@ import { HexagonsOverviewView } from "@/components/library/hexagons-overview-vie
 import { SearchView } from "@/components/library/search-view";
 import { AboutView } from "@/components/library/about-view";
 import { WriteView } from "@/components/library/write-view";
+import { AdminView } from "@/components/library/admin-view";
 import { MarginaliaIndexView } from "@/components/library/marginalia-index-view";
 import { CommandPalette } from "@/components/library/command-palette";
 import { ShortcutsHelp } from "@/components/library/shortcuts-help";
@@ -29,13 +30,15 @@ export default function Home() {
       .catch(() => {});
   }, []);
 
-  // Keyboard shortcuts: Cmd+6 / Ctrl+6 → Marginalia Index
-  // (was Cmd+7; renumbered after removing the Babel generator view)
+  // Keyboard shortcuts: Cmd+6 / Ctrl+6 → Marginalia Index, Cmd+8 → Admin
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "6") {
         e.preventDefault();
         setView({ name: "marginalia" });
+      } else if ((e.metaKey || e.ctrlKey) && e.key === "8") {
+        e.preventDefault();
+        setView({ name: "admin" });
       }
     };
     document.addEventListener("keydown", handleKeyDown);
@@ -55,6 +58,7 @@ export default function Home() {
         {view.name === "search" && <SearchView key={`search-${view.query}`} initialQuery={view.query} />}
         {view.name === "about" && <AboutView key="about" />}
         {view.name === "write" && <WriteView key={`write-${view.slug || 'new'}`} slug={view.slug} />}
+        {view.name === "admin" && <AdminView key="admin" />}
         {view.name === "marginalia" && <MarginaliaIndexView key="marginalia" />}
       </main>
       <Footer />
