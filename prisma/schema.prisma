@@ -6,7 +6,10 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  // Vercel 的文件系统是只读的，SQLite 写到本地文件无法持久化，
+  // 因此改用 PostgreSQL（推荐 Neon / Vercel Postgres / Supabase）。
+  // 连接串通过环境变量 DATABASE_URL 注入。
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
