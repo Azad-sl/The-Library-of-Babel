@@ -44,8 +44,14 @@ export const metadata: Metadata = {
     "文学",
   ],
   authors: [{ name: "图书管理员" }],
-  icons: {
-    icon: "/logo.svg",
+    icons: {
+    icon: [
+      { url: "/logo.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   openGraph: {
     title: "巴别图书馆 · The Library of Babel",
