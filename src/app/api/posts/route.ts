@@ -73,6 +73,7 @@ export async function POST(request: Request) {
       readMinutes,
       tags,
       authorName,
+      authorUrl,
     } = body;
 
     if (!title || typeof title !== "string" || !title.trim()) {
@@ -101,6 +102,10 @@ export async function POST(request: Request) {
           typeof authorName === "string" && authorName.trim()
             ? authorName.trim()
             : "图书管理员",
+        authorUrl:
+          typeof authorUrl === "string" && authorUrl.trim()
+            ? authorUrl.trim()
+            : null,
         published: true,
       },
     });
