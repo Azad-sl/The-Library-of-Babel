@@ -68,6 +68,9 @@ function EmptyState() {
   return (
     <p className="font-body-serif text-xs italic text-muted-foreground">
       页边尚无批注 · 选中文字以添加
+       <span className="block mt-1 text-[10px] text-muted-foreground/60">
+        批注仅保存在本地浏览器，清除缓存后将丢失
+      </span>
     </p>
   );
 }
