@@ -78,6 +78,11 @@ function loadVolumeList(): Promise<PostSummary[]> {
       return list;
     });
   }
+  /** 删改文章后调用，让缓存过期 */
+export function invalidateVolumeListCache() {
+  _volumeListCache = null;
+  _volumeListPromise = null;
+}
   return _volumeListPromise;
 }
 
