@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { api, ApiError, clearAdminToken, getAdminToken } from "@/lib/api";
 import { useLibrary } from "@/store/library-store";
+import { invalidateVolumeListCache } from "./volume-view";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -119,6 +120,7 @@ export function WriteView({ slug }: { slug?: string }) {
     try {
       if (editing) {
         await api.updatePost(editing.id, payload);
+        invalidateVolumeListCache();
         toast.success("卷册已更新");
       } else {
         const created = await api.createPost(payload);
@@ -145,6 +147,7 @@ export function WriteView({ slug }: { slug?: string }) {
     if (!confirm("确定要将这一卷移出图书馆？此操作不可撤销。")) return;
     try {
       await api.deletePost(editing.id);
+      invalidateVolumeListCache();
       toast.success("已移出图书馆");
       setView({ name: "library" });
     } catch (e: any) {
