@@ -122,7 +122,10 @@ export const api = {
       body: JSON.stringify({ postId, name, content }),
     }),
 
-  seed: () => jfetch<{ ok: boolean; count: number }>(`/api/seed`, { method: "POST" }),
+  seed: () => fetch(`/api/seed`, { method: "POST" }).then(r => {
+  if (!r.ok) throw new ApiError(r.status, r.statusText);
+  return r.json();
+}),
 
   /* ---- Auth ---- */
   login: (password: string) =>
