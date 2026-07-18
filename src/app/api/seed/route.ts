@@ -54,9 +54,7 @@ export async function POST(request: Request) {
           coverImage: p.coverImage,
           hexagon: p.hexagon,
           featured: p.featured,
-          readMinutes: p.readMinutes,
           tags: p.tags,
-          authorName: "图书管理员",
         },
       });
       upserted++;
