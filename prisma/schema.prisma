@@ -38,6 +38,7 @@ model Post {
   likes       Int      @default(0)
   authorId    String   @default("librarian")
   authorName  String   @default("图书管理员")
+  authorUrl   String?
   tags        String   @default("") // comma-separated tags
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
