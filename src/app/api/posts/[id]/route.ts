@@ -35,7 +35,9 @@ export async function GET(
       data: { views: { increment: 1 } },
     });
 
-    return NextResponse.json(updated);
+    return NextResponse.json(updated, {
+  headers: { "Cache-Control": "no-store, max-age=0" },
+});
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json({ error: message }, { status: 500 });
