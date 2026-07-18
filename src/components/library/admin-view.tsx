@@ -349,7 +349,7 @@ function AdminGate({
         </p>
         <h1 className="font-serif-display text-3xl font-semibold">馆长办公室</h1>
         <p className="mt-2 font-body-serif text-sm italic text-muted-foreground">
-          非馆长不得入内。请念出口令。
+          非馆长授权不得入内。请输入开门口令。
         </p>
         <div className="mt-6 space-y-3">
           <Input
