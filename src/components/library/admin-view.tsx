@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { api, setAdminToken, clearAdminToken, getAdminToken, ApiError } from "@/lib/api";
 import { useLibrary } from "@/store/library-store";
+import { invalidateVolumeListCache } from "./volume-view";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -519,6 +520,7 @@ export function AdminView() {
     setDeleting(true);
     try {
       await api.deletePost(deleteTarget.id);
+      invalidateVolumeListCache();
       setPosts((prev) => prev.filter((p) => p.id !== deleteTarget.id));
       toast.success("已移出图书馆", { description: deleteTarget.title });
       setDeleteTarget(null);
