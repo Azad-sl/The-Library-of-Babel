@@ -102,13 +102,17 @@ export function VolumeCard({
               <Highlight text={post.excerpt} q={highlight} />
             </p>
           )}
-          <p className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground">
-            <span className="font-body-serif">{post.hexagon}</span>
-            <span>·</span>
-            <span className="flex items-center gap-1">
-              <Clock className="h-3 w-3" /> {post.readMinutes} 分
-            </span>
-          </p>
+         <p className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground">
+  <span className="flex items-center gap-1">
+    <Feather className="h-3 w-3" /> {post.authorName}
+  </span>
+  <span>·</span>
+  <span className="font-body-serif">{post.hexagon}</span>
+  <span>·</span>
+  <span className="flex items-center gap-1">
+    <Clock className="h-3 w-3" /> {post.readMinutes} 分
+  </span>
+</p>
         </div>
       </button>
     );
@@ -199,6 +203,9 @@ export function VolumeCard({
         {/* Body */}
         <div className="space-y-3 p-5">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <Feather className="h-3 w-3 text-gold/70" />
+            <span className="font-body-serif">{post.authorName}</span>
+            <span>·</span>
             <Hexagon className="h-3 w-3 text-gold/70" />
             <button
               onClick={(e) => {
@@ -290,6 +297,10 @@ export function VolumeCard({
             <Highlight text={post.excerpt || "（无提要）"} q={highlight} />
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1">
+              <Feather className="h-3 w-3" /> {post.authorName}
+            </span>
+            <span>·</span>
             <span className="font-body-serif text-gold/80">{post.hexagon}</span>
             <span>·</span>
             <span>{dateStr}</span>
