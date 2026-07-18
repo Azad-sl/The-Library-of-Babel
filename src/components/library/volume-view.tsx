@@ -594,8 +594,20 @@ export function VolumeView({ slug }: { slug: string }) {
                 </p>
               )}
               <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <Feather className="h-3.5 w-3.5 text-gold/70" /> {p.authorName}
+                  <span className="flex items-center gap-1.5">
+                  <Feather className="h-3.5 w-3.5 text-gold/70" />
+                  {p.authorUrl ? (
+                    <a
+                      href={p.authorUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gold/80 underline decoration-gold/30 underline-offset-4 transition-colors hover:text-gold hover:decoration-gold"
+                    >
+                      {p.authorName}
+                    </a>
+                  ) : (
+                    <span>{p.authorName}</span>
+                  )}
                 </span>
                 <span>·</span>
                 <span>{dateStr}</span>
