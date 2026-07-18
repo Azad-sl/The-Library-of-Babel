@@ -22,14 +22,6 @@ import { api } from "@/lib/api";
 export default function Home() {
   const { view, setView } = useLibrary();
 
-  // Seed on first mount if library is empty (best-effort, silent)
-  useEffect(() => {
-    api
-      .seed()
-      .then(() => {})
-      .catch(() => {});
-  }, []);
-
   // Keyboard shortcuts: Cmd+6 / Ctrl+6 → Marginalia Index, Cmd+8 → Admin
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
