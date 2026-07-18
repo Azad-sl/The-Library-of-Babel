@@ -75,6 +75,7 @@ export async function PATCH(
       "hexagon",
       "tags",
       "authorName",
+      "authorUrl",
     ] as const;
     for (const f of stringFields) {
       if (typeof body[f] === "string") data[f] = body[f] as string;
