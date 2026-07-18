@@ -41,6 +41,8 @@ export function WriteView({ slug }: { slug?: string }) {
   const [tags, setTags] = useState("");
   const [featured, setFeatured] = useState(false);
   const [readMinutes, setReadMinutes] = useState(5);
+  const [authorName, setAuthorName] = useState("图书管理员");
+  const [authorUrl, setAuthorUrl] = useState("");
   const [coverImage, setCoverImage] = useState("");
   const [generatingCover, setGeneratingCover] = useState(false);
   const [mode, setMode] = useState<"write" | "preview">("write");
@@ -81,6 +83,8 @@ export function WriteView({ slug }: { slug?: string }) {
         setFeatured(p.featured);
         setReadMinutes(p.readMinutes);
         setCoverImage(p.coverImage || "");
+        setAuthorName(p.authorName || "图书管理员");
+        setAuthorUrl((p as any).authorUrl || "");
       })
       .catch(() => toast.error("载入失败"))
       .finally(() => setLoading(false));
@@ -109,7 +113,8 @@ export function WriteView({ slug }: { slug?: string }) {
       featured,
       readMinutes: readMinutes,
       coverImage: coverImage.trim() || null,
-      authorName: "图书管理员",
+      authorName: authorName.trim() || "图书管理员",
+      authorUrl: authorUrl.trim() || null,
     };
     try {
       if (editing) {
@@ -277,7 +282,27 @@ export function WriteView({ slug }: { slug?: string }) {
             />
           </div>
         </div>
-
+                {/* Author name + URL */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <Label className="mb-1.5 block font-body-serif text-sm">作者</Label>
+            <Input
+              value={authorName}
+              onChange={(e) => setAuthorName(e.target.value)}
+              placeholder="图书管理员"
+              className="font-body-serif text-sm"
+            />
+          </div>
+          <div>
+            <Label className="mb-1.5 block font-body-serif text-sm">作者主页（可选）</Label>
+            <Input
+              value={authorUrl}
+              onChange={(e) => setAuthorUrl(e.target.value)}
+              placeholder="https://example.com"
+              className="font-mono text-sm"
+            />
+          </div>
+        </div>
         <div>
           <Label className="mb-1.5 block font-body-serif text-sm">提要（可选）</Label>
           <Textarea
