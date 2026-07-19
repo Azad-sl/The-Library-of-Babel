@@ -6,11 +6,11 @@ import type { View } from "@/lib/types";
 interface LibraryState {
   view: View;
   history: View[];
-  refreshKey: number;       // ← 新增
+  refreshKey: number;       
   setView: (v: View) => void;
   goBack: () => void;
   canGoBack: () => boolean;
-  bumpRefresh: () => void;  // ← 新增
+  bumpRefresh: () => void;  
 }
  
 export const useLibrary = create<LibraryState>((set, get) => ({
@@ -25,6 +25,11 @@ export const useLibrary = create<LibraryState>((set, get) => ({
       refreshKey: get().refreshKey + 1,  // ← 切视图时递增
     });
     if (typeof window !== "undefined") {
+      if (v.name === "volume") {
+        window.history.replaceState(null, "", "/?v=" + encodeURIComponent(v.slug));
+      } else {
+        window.history.replaceState(null, "", "/");
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   },
