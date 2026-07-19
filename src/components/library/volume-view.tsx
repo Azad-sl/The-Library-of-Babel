@@ -99,10 +99,11 @@ export function VolumeView({ slug }: { slug: string }) {
     },
     [post.data?.id]
   );
-  const comments = useAsync(
-    () => (post.data ? api.listComments(post.data.id) : Promise.resolve([])),
-    [post.data?.id]
-  );
+ // 文章评论功能暂不启用 
+// const comments = useAsync(
+//   () => (post.data ? api.listComments(post.data.id) : Promise.resolve([])),
+//   [post.data?.id]
+// );
   // Full volume list (cached at module level) — used for prev/next navigation
   const volumeList = useAsync(() => loadVolumeList(), []);
 
@@ -736,6 +737,7 @@ export function VolumeView({ slug }: { slug: string }) {
             </div>
 
             {/* Comments */}
+            {false && /* 读者批注（评论功能暂时关闭，恢复时把 false 改 true 即可）*/
             <section className="mt-14 print:hidden">
               <h2 className="mb-4 flex items-center gap-2 font-serif-display text-2xl font-semibold">
                 <MessageSquare className="h-5 w-5 text-gold" /> 读者批注
@@ -770,6 +772,7 @@ export function VolumeView({ slug }: { slug: string }) {
                 )}
               </div>
             </section>
+              }
 
             {/* Related */}
             {related.data && related.data.length > 0 && (
