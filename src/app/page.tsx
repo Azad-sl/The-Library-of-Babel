@@ -22,6 +22,15 @@ import { api } from "@/lib/api";
 export default function Home() {
   const { view, setView } = useLibrary();
 
+  // 打开带 ?v=xxx 的链接时，自动跳到对应文章
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("v");
+  if (slug) {
+    setView({ name: "volume", slug });
+  }
+}, [setView]);
+  
   // Keyboard shortcuts: Cmd+6 / Ctrl+6 → Marginalia Index, Cmd+8 → Admin
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
