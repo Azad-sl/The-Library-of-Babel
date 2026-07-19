@@ -252,3 +252,6 @@ node .next/standalone/server.js
 *—— 博尔赫斯*
 
 </div>
+<p align="center">
+  <img src="https://img.shields.io/badge/♾️-永远在翻阅-1a1a2e?style=flat-square" alt="永远在翻阅">
+</p>
