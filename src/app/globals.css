@@ -128,49 +128,49 @@
 }
 
 .candlelight {
-  /* Candlelight: warm amber glow — reading by candlelight in the scriptorium */
-  --background: oklch(0.19 0.025 55);           /* warm dark amber-black */
-  --foreground: oklch(0.91 0.04 82);            /* warm candlelit text */
-  --card: oklch(0.23 0.03 55);                  /* slightly lighter amber */
-  --card-foreground: oklch(0.88 0.04 80);
-  --popover: oklch(0.23 0.03 55);
-  --popover-foreground: oklch(0.88 0.04 80);
-  --primary: oklch(0.82 0.14 75);               /* bright candle gold */
-  --primary-foreground: oklch(0.16 0.025 55);
-  --secondary: oklch(0.28 0.03 55);
-  --secondary-foreground: oklch(0.85 0.035 80);
-  --muted: oklch(0.26 0.028 55);
-  --muted-foreground: oklch(0.74 0.04 75);
-  --accent: oklch(0.38 0.04 55);
-  --accent-foreground: oklch(0.88 0.04 80);
+  /* 烛火：琥珀暖光 — 像深夜被烛火照亮的书房 */
+  --background: oklch(0.28 0.05 42);           /* 明显偏暖的琥珀黑 */
+  --foreground: oklch(0.90 0.05 80);            /* 暖色文字 */
+  --card: oklch(0.32 0.055 42);                 /* 稍亮的琥珀卡片 */
+  --card-foreground: oklch(0.87 0.05 78);
+  --popover: oklch(0.32 0.055 42);
+  --popover-foreground: oklch(0.87 0.05 78);
+  --primary: oklch(0.85 0.16 72);               /* 明亮烛金 */
+  --primary-foreground: oklch(0.18 0.04 42);
+  --secondary: oklch(0.35 0.05 42);
+  --secondary-foreground: oklch(0.85 0.045 78);
+  --muted: oklch(0.33 0.045 42);
+  --muted-foreground: oklch(0.72 0.045 72);
+  --accent: oklch(0.42 0.06 48);
+  --accent-foreground: oklch(0.87 0.05 78);
   --destructive: oklch(0.65 0.18 25);
-  --border: oklch(0.82 0.08 75 / 25%);
-  --input: oklch(0.82 0.08 75 / 28%);
-  --ring: oklch(0.82 0.14 78);
-  --gold: oklch(0.82 0.16 78);                  /* brighter, more saturated candle gold */
-  --parchment: oklch(0.85 0.04 78);
-  --ink: oklch(0.16 0.02 55);
+  --border: oklch(0.82 0.1 72 / 25%);
+  --input: oklch(0.82 0.1 72 / 28%);
+  --ring: oklch(0.82 0.16 78);
+  --gold: oklch(0.85 0.18 75);                  /* 更亮更饱和的金 */
+  --parchment: oklch(0.85 0.05 78);
+  --ink: oklch(0.18 0.035 42);
   --chart-1: oklch(0.75 0.14 80);
   --chart-2: oklch(0.65 0.1 180);
   --chart-3: oklch(0.58 0.08 230);
   --chart-4: oklch(0.78 0.16 30);
   --chart-5: oklch(0.68 0.12 45);
-  --sidebar: oklch(0.21 0.027 55);
-  --sidebar-foreground: oklch(0.88 0.04 80);
-  --sidebar-primary: oklch(0.82 0.14 75);
-  --sidebar-primary-foreground: oklch(0.16 0.025 55);
-  --sidebar-accent: oklch(0.28 0.03 55);
-  --sidebar-accent-foreground: oklch(0.88 0.04 80);
-  --sidebar-border: oklch(0.82 0.08 75 / 20%);
-  --sidebar-ring: oklch(0.82 0.14 78);
+  --sidebar: oklch(0.26 0.048 42);
+  --sidebar-foreground: oklch(0.87 0.05 78);
+  --sidebar-primary: oklch(0.85 0.16 72);
+  --sidebar-primary-foreground: oklch(0.18 0.04 42);
+  --sidebar-accent: oklch(0.35 0.05 42);
+  --sidebar-accent-foreground: oklch(0.87 0.05 78);
+  --sidebar-border: oklch(0.82 0.1 72 / 20%);
+  --sidebar-ring: oklch(0.82 0.16 78);
 }
 
 /* Candlelight texture - warm amber glow spots */
 .candlelight .ink-texture {
   background-image:
-    radial-gradient(circle at 15% 20%, oklch(0.82 0.16 78 / 0.1) 0, transparent 45%),
-    radial-gradient(circle at 85% 80%, oklch(0.75 0.12 70 / 0.08) 0, transparent 50%),
-    radial-gradient(circle at 50% 50%, oklch(0.7 0.08 60 / 0.06) 0, transparent 70%);
+    radial-gradient(circle at 15% 20%, oklch(0.82 0.16 78 / 0.22) 0, transparent 45%),
+    radial-gradient(circle at 85% 80%, oklch(0.75 0.12 70 / 0.18) 0, transparent 50%),
+    radial-gradient(circle at 50% 50%, oklch(0.7 0.08 60 / 0.14) 0, transparent 70%);
 }
 
 /* Candlelight drop-cap - slightly different gold with glow */
