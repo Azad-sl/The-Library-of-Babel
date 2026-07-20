@@ -14,15 +14,17 @@ const HEX_COVERS: Record<string, string> = {
   思辨: "/covers/hex-speculation.jpg",
   书信: "/covers/hex-letter.jpg",
   札记: "/covers/hex-notes.jpg",
+  抄录: "/covers/chaolu.jpg",
 };
 
 /** Curated one-line description per hexagon name (atmospheric, literary). */
 const HEX_DESCRIPTIONS: Record<string, string> = {
-  随笔: "随手写下，无主题的散步——意识在纸上漂流的痕迹。",
-  读书笔记: "借他人的灯，照自己的路——读过的书在脑中留下的回声。",
+  随笔: "随手写下，无主题的散步。",
+  读书笔记: "借他人的灯，照自己的路。",
   思辨: "把一个念头反复折叠，直到它显出折痕里的光。",
-  书信: "写给一个未曾谋面的人——也许正是未来的自己。",
+  书信: "写给一个未曾谋面的人。",
   札记: "夜里读到的字，清晨想起的事，记在书页边的小字。",
+  抄录: "从别人的书页里，摘下那一行照亮自己的句子。",
 };
 
 /** Deterministic hex angle for spine rotation fallback. */
