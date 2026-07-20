@@ -27,7 +27,7 @@ import { cn } from "@/lib/utils";
 import type { Post } from "@/lib/types";
 import { generateCoverDataUrl } from "@/lib/cover-generator";
 
-const HEXAGON_PRESETS = ["随笔", "读书笔记", "思辨", "札记", "书信", "未分类"];
+const HEXAGON_PRESETS = ["随笔", "读书笔记", "思辨", "札记", "书信", "抄录", "未分类"];
 
 export function WriteView({ slug }: { slug?: string }) {
   const { setView, goBack, canGoBack } = useLibrary();
