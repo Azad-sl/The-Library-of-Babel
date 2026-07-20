@@ -110,9 +110,17 @@ export function Footer() {
             建于 Next.js · 衬线字体 Cormorant & EB Garamond
           </p>
           <p className="flex items-center gap-2 font-body-serif text-xs text-muted-foreground">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold flicker" />
-            烛火不灭 · The candle burns on
-          </p>
+  <a
+    href="https://home.azad.asia"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-muted-foreground transition-colors hover:text-gold"
+  >
+    Azad
+  </a>
+  <span className="inline-block h-1.5 w-1.5 rounded-full bg-gold flicker" />
+  烛火不灭 · The candle burns on
+</p>
         </div>
       </div>
     </footer>
