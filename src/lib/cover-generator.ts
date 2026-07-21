@@ -170,9 +170,10 @@ export function generateCoverDataUrl({ title, excerpt, hexagon }: CoverParams): 
   // 根据标题长度自适应字号
   const titleLen = title.length;
   let fontSize = 64;
-  if (titleLen > 20) fontSize = 52;
-  if (titleLen > 30) fontSize = 44;
-  if (titleLen > 40) fontSize = 36;
+  if (titleLen > 12) fontSize = 52;
+  if (titleLen > 20) fontSize = 44;
+  if (titleLen > 30) fontSize = 36;
+  if (titleLen > 40) fontSize = 28;
   ctx.font = `500 ${fontSize}px 'Cormorant Garamond', 'EB Garamond', Georgia, serif`;
 
   // 手动换行
