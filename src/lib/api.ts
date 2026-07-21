@@ -58,9 +58,12 @@ export class ApiError extends Error {
 }
 
 async function jfetch<T>(url: string, init?: RequestInit): Promise<T> {
+  const isRead = !init?.method || init.method === "GET";
   const res = await fetch(url, {
     ...init,
-    headers: authHeaders(init?.headers),
+    headers: isRead
+      ? { "Content-Type": "application/json" }
+      : authHeaders(init?.headers),
   });
   if (!res.ok) {
     const txt = await res.text().catch(() => "");
