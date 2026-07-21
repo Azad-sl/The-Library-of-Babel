@@ -167,35 +167,32 @@ export function generateCoverDataUrl({ title, excerpt, hexagon }: CoverParams): 
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
 
-  // 根据标题长度自适应字号
-  const titleLen = title.length;
-  let fontSize = 64;
-  if (titleLen > 12) fontSize = 52;
-  if (titleLen > 20) fontSize = 44;
-  if (titleLen > 30) fontSize = 36;
-  if (titleLen > 40) fontSize = 28;
-  ctx.font = `500 ${fontSize}px 'Cormorant Garamond', 'EB Garamond', Georgia, serif`;
-
-  // 手动换行
+  // 根据标题长度自适应字号 —— 动态测量，确保标题完整显示
   const maxWidth = W * 0.8;
-  const lines: string[] = [];
-  let currentLine = "";
-  for (const ch of title) {
-    const testLine = currentLine + ch;
-    if (ctx.measureText(testLine).width > maxWidth && currentLine) {
-      lines.push(currentLine);
-      currentLine = ch;
-    } else {
-      currentLine = testLine;
+  const maxLines = 4;
+  let fontSize = 64;
+  let lines: string[] = [];
+ 
+  // 逐步缩小字号，直到标题能在 maxLines 行内完整显示
+  while (fontSize >= 20) {
+    ctx.font = `500 ${fontSize}px 'Cormorant Garamond', 'EB Garamond', Georgia, serif`;
+    lines = [];
+    let currentLine = "";
+    for (const ch of title) {
+      const testLine = currentLine + ch;
+      if (ctx.measureText(testLine).width > maxWidth && currentLine) {
+        lines.push(currentLine);
+        currentLine = ch;
+      } else {
+        currentLine = testLine;
+      }
     }
+    if (currentLine) lines.push(currentLine);
+    if (lines.length <= maxLines) break;
+    fontSize -= 4;
   }
-  if (currentLine) lines.push(currentLine);
-  const maxLines = 3;
-  const displayLines = lines.slice(0, maxLines);
-  if (lines.length > maxLines) {
-    const last = displayLines[maxLines - 1];
-    displayLines[maxLines - 1] = last.slice(0, Math.max(0, last.length - 1)) + "…";
-  }
+ 
+  const displayLines = lines;
 
   const lineHeight = fontSize * 1.3;
   const totalH = displayLines.length * lineHeight;
