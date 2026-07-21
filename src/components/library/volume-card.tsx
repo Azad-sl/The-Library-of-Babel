@@ -171,8 +171,8 @@ export function VolumeCard({
                     <div className="h-px w-full bg-gold/50" />
                     <div className="h-px w-3/4 bg-gold/30" />
                   </div>
-                  <p className="font-serif-display text-[0.6rem] leading-tight text-gold/90 [writing-mode:vertical-rl]">
-                    {post.title.slice(0, 12)}
+                  <p className="font-serif-display text-[0.6rem] leading-tight text-gold/90 [writing-mode:vertical-rl] overflow-hidden">
+                    {post.title}
                   </p>
                   <div className="space-y-1">
                     <div className="h-px w-3/4 bg-gold/30" />
