@@ -9,7 +9,7 @@ import { ReadingHeatmap } from "./reading-heatmap";
 import { ReadingTimeRing } from "./reading-time-ring";
 import { useAsync } from "@/hooks/use-async";
 import { api } from "@/lib/api";
-import { getContinueReading, getFinishedReading, type SavedProgress } from "@/hooks/use-reading-memory";
+import { getContinueReading, getFinishedReading, cleanStaleProgress, type SavedProgress } from "@/hooks/use-reading-memory";
 import { Feather, Hexagon, BookOpen, Sparkles, Mail, Github, Library, Clock, Check, ArrowRight, BookCheck, Highlighter } from "lucide-react";
 
 export function AboutView() {
@@ -20,6 +20,9 @@ export function AboutView() {
   // Reading footprints — client-side only from localStorage
   const [readingHistory, setReadingHistory] = useState<SavedProgress[]>([]);
   useEffect(() => {
+    if (stats.data?.slugs) {
+    cleanStaleProgress(new Set(stats.data.slugs));
+    }
     const inProgress = getContinueReading();
     const finished = getFinishedReading();
     const all: SavedProgress[] = [];
@@ -27,7 +30,7 @@ export function AboutView() {
     all.push(...finished);
     all.sort((a, b) => b.savedAt - a.savedAt);
     setReadingHistory(all);
-  }, []);
+    }, [stats.data]);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8 rise-in">
