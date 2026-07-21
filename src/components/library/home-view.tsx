@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { libraryScale, hashSeed } from "@/lib/babel";
 import { cn } from "@/lib/utils";
-import { getContinueReading, getFinishedReading, type SavedProgress } from "@/hooks/use-reading-memory";
+import { getContinueReading, getFinishedReading, cleanStaleProgress, type SavedProgress } from "@/hooks/use-reading-memory";
 import type { PostSummary } from "@/lib/types";
 import { QuoteOfTheDay } from "./quote-of-the-day";
 
@@ -34,7 +34,14 @@ export function HomeView() {
   const recent = useAsync(() => api.listPosts({ limit: 5 }), []);
   const hexagons = useAsync(() => api.listHexagons(), []);
   const stats = useAsync(() => api.stats(), []);
- 
+
+  // 清理已删除文章的阅读进度
+useEffect(() => {
+  if (stats.data?.slugs) {
+    cleanStaleProgress(new Set(stats.data.slugs));
+  }
+}, [stats.data]);
+  
   // ← 新增：视图切换回来时自动刷新数据
   useEffect(() => {
     featured.reload();
