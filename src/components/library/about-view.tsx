@@ -84,6 +84,9 @@ export function AboutView() {
           <li>
             <strong>札记与书信</strong>——给某个具体的人，或某个想象中的你。
           </li>
+          <li>
+            <strong>抄录</strong>——从别人的书页里，摘下那一行照亮自己的句子。
+          </li>
         </ul>
 
         <div className="gold-divider" aria-hidden="true">❖</div>
