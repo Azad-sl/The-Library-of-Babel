@@ -46,7 +46,7 @@ export async function GET(request: Request) {
     });
 
     return NextResponse.json(posts, {
-  headers: { "Cache-Control": "no-store, max-age=0" },
+  headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
 });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
