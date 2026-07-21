@@ -34,6 +34,10 @@ export async function GET() {
       totalLikes: agg._sum.likes ?? 0,
       oldestDate: oldest?.createdAt ?? null,
       newestDate: newest?.createdAt ?? null,
+      slugs: await db.post.findMany({
+      where: { published: true },
+      select: { slug: true },
+        }).then((rows) => rows.map((r) => r.slug)),
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
