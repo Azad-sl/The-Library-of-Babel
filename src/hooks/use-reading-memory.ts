@@ -376,3 +376,17 @@ export function formatSessionClock(totalSeconds: number): string {
 export function minutesRoundedUp(totalSeconds: number): number {
   return Math.max(1, Math.ceil(totalSeconds / 60));
 }
+
+export function cleanStaleProgress(validSlugs: Set<string>) {
+  try {
+    const keys = Object.keys(localStorage).filter((k) =>
+      k.startsWith(PREFIX)
+    );
+    for (const k of keys) {
+      const slug = k.slice(PREFIX.length);
+      if (!validSlugs.has(slug)) {
+        localStorage.removeItem(k);
+      }
+    }
+  } catch {}
+}
