@@ -232,6 +232,7 @@ export function CommandPalette() {
       title="巴别图书馆 · 命令面板"
       description="搜索回廊、卷册或命令……"
       showCloseButton={false}
+      filter={showVolumes ? () : 1 : undefined}
       className="sm:max-w-xl border-gold/30 bg-background shadow-[0_0_60px_-12px_var(--gold)]"
     >
       {/* ---- Custom header ---- */}
