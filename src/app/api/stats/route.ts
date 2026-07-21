@@ -27,18 +27,23 @@ export async function GET() {
       }),
     ]);
 
-    return NextResponse.json({
-      totalVolumes: total,
-      totalHexagons: hexagonRows.length,
-      totalViews: agg._sum.views ?? 0,
-      totalLikes: agg._sum.likes ?? 0,
-      oldestDate: oldest?.createdAt ?? null,
-      newestDate: newest?.createdAt ?? null,
-      slugs: await db.post.findMany({
-      where: { published: true },
-      select: { slug: true },
+        return NextResponse.json(
+      {
+        totalVolumes: total,
+        totalHexagons: hexagonRows.length,
+        totalViews: agg._sum.views ?? 0,
+        totalLikes: agg._sum.likes ?? 0,
+        oldestDate: oldest?.createdAt ?? null,
+        newestDate: newest?.createdAt ?? null,
+        slugs: await db.post.findMany({
+          where: { published: true },
+          select: { slug: true },
         }).then((rows) => rows.map((r) => r.slug)),
-    });
+      },
+      {
+        headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
+      }
+    );
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json({ error: message }, { status: 500 });
