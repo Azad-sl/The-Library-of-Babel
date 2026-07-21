@@ -16,7 +16,9 @@ export async function GET() {
         (a, b) => b.count - a.count || a.name.localeCompare(b.name, "zh-Hans-CN")
       );
 
-    return NextResponse.json(stats);
+    return NextResponse.json(stats, {
+    headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
+  });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json({ error: message }, { status: 500 });
