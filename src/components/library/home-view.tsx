@@ -30,10 +30,10 @@ import { QuoteOfTheDay } from "./quote-of-the-day";
 
 export function HomeView() {
   const { setView, refreshKey } = useLibrary();
-  const featured = useAsync(() => api.listPosts({ featured: true, limit: 6 }), []);
-  const recent = useAsync(() => api.listPosts({ limit: 5 }), []);
-  const hexagons = useAsync(() => api.listHexagons(), []);
-  const stats = useAsync(() => api.stats(), []);
+  const featured = useAsync(() => api.listPosts({ featured: true, limit: 6 }), [], { cacheKey: "home-featured" });
+  const recent = useAsync(() => api.listPosts({ limit: 5 }), [], { cacheKey: "home-recent" });
+  const hexagons = useAsync(() => api.listHexagons(), [], { cacheKey: "home-hexagons" });
+  const stats = useAsync(() => api.stats(), [], { cacheKey: "home-stats" });
 
   // 清理已删除文章的阅读进度
 useEffect(() => {
@@ -41,14 +41,6 @@ useEffect(() => {
     cleanStaleProgress(new Set(stats.data.slugs));
   }
 }, [stats.data]);
-  
-  // ← 新增：视图切换回来时自动刷新数据
-  useEffect(() => {
-    featured.reload();
-    recent.reload();
-    hexagons.reload();
-    stats.reload();
-  }, [refreshKey]);
 
   return (
     <div className="page-enter">
