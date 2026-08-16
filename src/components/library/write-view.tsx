@@ -69,26 +69,50 @@ export function WriteView({ slug }: { slug?: string }) {
     }, 0);
   };
 
-  useEffect(() => {
-    if (!slug) return;
-    setLoading(true);
-    api
-      .getPost(slug)
-      .then((p) => {
-        setEditing(p);
-        setTitle(p.title);
-        setHexagon(p.hexagon);
-        setExcerpt(p.excerpt || "");
-        setContent(p.content);
-        setTags(p.tags || "");
-        setFeatured(p.featured);
-        setReadMinutes(p.readMinutes);
-        setCoverImage(p.coverImage || "");
-        setAuthorName(p.authorName || "图书管理员");
-        setAuthorUrl((p as any).authorUrl || "");
-      })
-      .catch(() => toast.error("载入失败"))
-      .finally(() => setLoading(false));
+    useEffect(() => {
+    // 编辑模式：从远端加载已有卷册
+    if (slug) {
+      setLoading(true);
+      api
+        .getPost(slug)
+        .then((p) => {
+          setEditing(p);
+          setTitle(p.title);
+          setHexagon(p.hexagon);
+          setExcerpt(p.excerpt || "");
+          setContent(p.content);
+          setTags(p.tags || "");
+          setFeatured(p.featured);
+          setReadMinutes(p.readMinutes);
+          setCoverImage(p.coverImage || "");
+          setAuthorName(p.authorName || "图书管理员");
+          setAuthorUrl((p as any).authorUrl || "");
+        })
+        .catch(() => toast.error("载入失败"))
+        .finally(() => setLoading(false));
+      return;
+    }
+    // 新建模式：检查是否有暂存草稿可恢复
+    const draft = localStorage.getItem("draft-write");
+    if (draft) {
+      try {
+        const d = JSON.parse(draft);
+        setTitle(d.title || "");
+        setHexagon(d.hexagon || "随笔");
+        setExcerpt(d.excerpt || "");
+        setContent(d.content || "");
+        setTags(d.tags || "");
+        setFeatured(d.featured || false);
+        setReadMinutes(d.readMinutes || 5);
+        setAuthorName(d.authorName || "图书管理员");
+        setAuthorUrl(d.authorUrl || "");
+        setCoverImage(d.coverImage || "");
+        localStorage.removeItem("draft-write");
+        toast.success("已恢复上次未入库的草稿");
+      } catch {
+        // 草稿格式损坏，忽略即可
+      }
+    }
   }, [slug]);
 
   const slugify = (s: string) =>
@@ -98,9 +122,33 @@ export function WriteView({ slug }: { slug?: string }) {
       .replace(/[^\w\u4e00-\u9fa5]+/g, "-")
       .replace(/^-+|-+$/g, "") || `post-${Date.now()}`;
 
-  const save = async () => {
+    const save = async () => {
     if (!title.trim() || !content.trim()) {
       toast.error("标题与正文不可为空");
+      return;
+    }
+    // 入库前检查馆长密令
+    if (!getAdminToken()) {
+      toast.error("未持馆长密令，无法入库", {
+        description: "即将跳转馆长办公室，当前草稿会暂存",
+      });
+      // 把当前内容暂存到浏览器本地，回来后可恢复
+      localStorage.setItem(
+        "draft-write",
+        JSON.stringify({
+          title,
+          hexagon,
+          excerpt,
+          content,
+          tags,
+          featured,
+          readMinutes,
+          authorName,
+          authorUrl,
+          coverImage,
+        })
+      );
+      setTimeout(() => setView({ name: "admin" }), 1500);
       return;
     }
     setSaving(true);
@@ -121,9 +169,11 @@ export function WriteView({ slug }: { slug?: string }) {
       if (editing) {
         await api.updatePost(editing.id, payload);
         invalidateVolumeListCache();
+        localStorage.removeItem("draft-write");
         toast.success("卷册已更新");
       } else {
         const created = await api.createPost(payload);
+        localStorage.removeItem("draft-write");
         toast.success("新卷册已入库");
         setEditing(created);
       }
@@ -233,7 +283,22 @@ export function WriteView({ slug }: { slug?: string }) {
           它早已写好——你只是替它落笔。
         </p>
       </div>
-
+ 
+      {/* 入库门槛提示：未持馆长密令时显示 */}
+      {!getAdminToken() && (
+        <div className="mb-6 rounded-lg border border-gold/30 bg-gold/5 px-4 py-3 text-center">
+          <p className="font-body-serif text-sm text-gold/90">
+            ⚠ 入库需要馆长开门密令。若未持令，撰写的内容将无法保存。
+          </p>
+          <button
+            onClick={() => setView({ name: "admin" })}
+            className="mt-1.5 text-xs text-gold/60 underline underline-offset-2 hover:text-gold"
+          >
+            前往馆长办公室 →
+          </button>
+        </div>
+      )}
+      
       {/* Form */}
       <div className="space-y-5">
         {/* Title */}
@@ -386,7 +451,7 @@ export function WriteView({ slug }: { slug?: string }) {
           )}
           {!coverImage.trim() && (
             <p className="mt-1 text-xs text-muted-foreground">
-              点击「生成封面」根据标题与分类自动生成专属文学封面，或手动输入图片 URL。
+              点击「生成封面」根据标题与分类自动生成专属文学封面，或手动输入图片 URL。留空则自动生成书脊渐变占位图片。
             </p>
           )}
         </div>
