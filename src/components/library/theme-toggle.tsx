@@ -52,40 +52,40 @@ export function ThemeToggle() {
     const nextTheme = THEME_CYCLE[nextIndex];
     const nextMeta = THEME_META[nextTheme];
 
-    // ── Theme transition animation ──
-    // Clip-path circle reveal from the toggle button outward
-    if (buttonRef.current && typeof document !== "undefined") {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      // Calculate max radius to cover the whole viewport from the button center
-      const maxR = Math.hypot(
-        Math.max(cx, window.innerWidth - cx),
-        Math.max(cy, window.innerHeight - cy)
-      );
-
-      // Create an overlay element with the next theme's background color
-      const overlay = document.createElement("div");
-      overlay.style.cssText = `
-        position:fixed; inset:0; z-index:9999; pointer-events:none;
-        background:${nextMeta.nextColor};
-        clip-path:circle(0px at ${cx}px ${cy}px);
-        transition:clip-path 0.55s cubic-bezier(0.4,0,0.2,1);
-      `;
-      document.documentElement.appendChild(overlay);
-
-      // Trigger the expansion on the next frame
-      requestAnimationFrame(() => {
-        overlay.style.clipPath = `circle(${maxR}px at ${cx}px ${cy}px)`;
-      });
-
-      // After the clip animation, switch the theme and remove the overlay
-      setTimeout(() => {
-        setTheme(nextTheme);
-        overlay.style.transition = "opacity 0.3s ease";
-        overlay.style.opacity = "0";
-        setTimeout(() => overlay.remove(), 300);
-      }, 500);
+          // ── Theme transition animation ──
+      // Warm glow expanding from the toggle button — like lighting a candle
+      if (buttonRef.current && typeof document !== "undefined") {
+        const rect = buttonRef.current.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const maxR = Math.hypot(
+          Math.max(cx, window.innerWidth - cx),
+          Math.max(cy, window.innerHeight - cy)
+        );
+ 
+        const overlay = document.createElement("div");
+        overlay.style.cssText = `
+          position:fixed; inset:0; z-index:9999; pointer-events:none;
+          background:radial-gradient(circle at ${cx}px ${cy}px,
+            ${nextMeta.nextColor} 0%,
+            ${nextMeta.nextColor.replace(/[\d.]+\)$/, '0.6)')} 30%,
+            transparent 70%
+          );
+          clip-path:circle(0px at ${cx}px ${cy}px);
+          transition:clip-path 0.7s cubic-bezier(0.22,1,0.36,1);
+        `;
+        document.documentElement.appendChild(overlay);
+ 
+        requestAnimationFrame(() => {
+          overlay.style.clipPath = `circle(${maxR * 1.1}px at ${cx}px ${cy}px)`;
+        });
+ 
+        setTimeout(() => {
+          setTheme(nextTheme);
+          overlay.style.transition = "opacity 0.4s ease";
+          overlay.style.opacity = "0";
+          setTimeout(() => overlay.remove(), 400);
+        }, 650);
     } else {
       setTheme(nextTheme);
     }
