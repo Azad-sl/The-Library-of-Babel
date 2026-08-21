@@ -131,6 +131,17 @@ useEffect(() => {
             <div className="relative hidden aspect-square items-center justify-center lg:flex">
               <HexEmblem />
             </div>
+            {/* Mobile: compact hex emblem below the hero text */}
+            <div className="mt-8 flex items-center justify-center lg:hidden">
+              <div className="relative h-48 w-48">
+                <div className="absolute inset-0">
+                  <HexRing count={6} radius={60} className="h-full w-full slow-spin opacity-30" />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <HexLogo size={80} glow />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
