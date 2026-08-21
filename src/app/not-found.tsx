@@ -1,12 +1,21 @@
 "use client";
  
+import { useRouter } from "next/navigation";
 import { useLibrary } from "@/store/library-store";
 import { Button } from "@/components/ui/button";
 import { HexLogo } from "@/components/library/hex-logo";
 import { ArrowLeft, BookOpen, Hexagon } from "lucide-react";
+import type { View } from "@/lib/types";
  
 export default function NotFound() {
   const { setView } = useLibrary();
+  const router = useRouter();
+ 
+  // 先设好目标视图，再导航回首页，page.tsx 会从 Zustand 读到状态并渲染
+  const go = (view: View) => {
+    setView(view);
+    router.push("/");
+  };
  
   return (
     <div className="flex min-h-[70vh] flex-col items-center justify-center px-4 text-center rise-in">
@@ -40,14 +49,14 @@ export default function NotFound() {
       {/* 操作按钮 */}
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Button
-          onClick={() => setView({ name: "home" })}
+          onClick={() => go({ name: "home" })}
           className="group rounded-full bg-gold px-6 text-ink hover:bg-gold/90"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           返回大厅
         </Button>
         <Button
-          onClick={() => setView({ name: "hexagons" })}
+          onClick={() => go({ name: "hexagons" })}
           variant="outline"
           className="rounded-full border-gold/40 text-foreground hover:border-gold hover:text-gold"
         >
@@ -55,7 +64,7 @@ export default function NotFound() {
           浏览回廊
         </Button>
         <Button
-          onClick={() => setView({ name: "library" })}
+          onClick={() => go({ name: "library" })}
           variant="outline"
           className="rounded-full border-gold/40 text-foreground hover:border-gold hover:text-gold"
         >
