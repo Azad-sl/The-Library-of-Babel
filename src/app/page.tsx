@@ -50,7 +50,7 @@ useEffect(() => {
     <div className="relative flex min-h-screen flex-col">
       <LibraryBackground />
       <Header />
-      <main className="flex-1">
+        <main key={view.name} className="flex-1 page-flip">
         {view.name === "home" && <HomeView key="home" />}
         {view.name === "library" && <LibraryView key="library" />}
         {view.name === "volume" && <VolumeView key={`volume-${view.slug}`} slug={view.slug} />}
